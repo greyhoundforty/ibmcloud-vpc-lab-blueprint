@@ -45,7 +45,7 @@ modules:
       - name: cos_instance_name
         value: $blueprint.cos_instance_name
       - name: resource_group_id
-        value: $module.basic-resource-group.outputs.resource_group_id
+        value: $module.bp-resource-group.outputs.resource_group_id
     outputs:
       - name: cos_id
       - name: cos_crn
