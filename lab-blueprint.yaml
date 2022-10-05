@@ -49,3 +49,21 @@ modules:
     outputs:
       - name: cos_id
       - name: cos_crn
+  - name: bp-lab-vpc
+    layer: network
+    module_type: terraform
+    source:
+      source_type: github
+      git:
+        git_repo_url: "https://github.com/greyhoundforty/ibmcloud-vpc-lab-modules/tree/main/vpc"
+        git_branch: main
+    inputs:
+      - name: vpc_name
+        value: $blueprint.vpc_name
+      - name: vpc_region
+        value: $blueprint.vpc_region
+      - name: resource_group_id
+        value: $module.bp-resource-group.outputs.resource_group_id
+    outputs:
+      - name: cos_id
+      - name: cos_crn
