@@ -44,8 +44,6 @@ modules:
         value: $blueprint.provision_cos
       - name: cos_instance_name
         value: $blueprint.cos_instance_name
-      - name: cos_regional_location
-        value: $blueprint.vpc_region
       - name: resource_group_id
         value: $module.basic-resource-group.outputs.resource_group_id
     outputs:
