@@ -1,0 +1,9 @@
+# Resource parameters
+resource_group_name: Default
+# resource_group_name: basic
+provision_rg: false
+# provision_rg: true/false 
+# COS parameters
+cos_instance_name: cos-instance-test-bp
+provision_cos: true
+vpc_region: us-east

@@ -1,0 +1,53 @@
+name: "VPC Lab Blueprint"
+schema_version: "1.0.0"
+description: "Deploy VPC and associated resources for quick labs."
+type: "blueprint"
+inputs:
+  - name: resource_group_name
+  - name: provision_rg
+  - name: cos_instance_name
+  - name: provision_cos
+  - name: vpc_name
+  - name: vpc_region
+outputs:
+  - name: cos_id
+    value: $module.basic-cos-storage.outputs.cos_id
+settings:
+  - name: TF_VERSION
+    value: 1.0
+modules:
+  - name: bp-resource-group
+    module_type: terraform
+    source:
+      source_type: github
+      git:
+        git_repo_url: "https://github.com/greyhoundforty/ibmcloud-vpc-lab-modules/tree/main/resource_group"
+        git_branch: main
+    inputs:
+      - name: provision
+        value: $blueprint.provision_rg
+      - name: name
+        value: $blueprint.resource_group_name
+    outputs:
+      - name: resource_group_name
+      - name: resource_group_id
+  - name: bp-cos-storage
+    layer: storage
+    module_type: terraform
+    source:
+      source_type: github
+      git:
+        git_repo_url: "https://github.com/greyhoundforty/ibmcloud-vpc-lab-modules/tree/main/cos"
+        git_branch: main
+    inputs:
+      - name: provision_cos_instance
+        value: $blueprint.provision_cos
+      - name: cos_instance_name
+        value: $blueprint.cos_instance_name
+      - name: cos_regional_location
+        value: $blueprint.vpc_region
+      - name: resource_group_id
+        value: $module.basic-resource-group.outputs.resource_group_id
+    outputs:
+      - name: cos_id
+      - name: cos_crn
