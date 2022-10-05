@@ -11,7 +11,7 @@ inputs:
   - name: vpc_region
 outputs:
   - name: cos_id
-    value: $module.basic-cos-storage.outputs.cos_id
+    value: $module.bp-cos-storage.outputs.cos_id
 settings:
   - name: TF_VERSION
     value: 1.0
